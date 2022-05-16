@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class ButtonStart : MonoBehaviour
 {
-    public TextMeshProUGUI btnSST;
+    public Text btnSST;
     public Text txtOffset;
     public void OnButton()
     {
         Debug.Log("OnButtonStart");
         
 
-        GameSetting.title = btnSST.GetComponent<TextMeshProUGUI>().name;
+        GameSetting.title = btnSST.GetComponent<Text>().name;
         Debug.Log(GameSetting.title);
         if (!GameSetting.title.Equals("select_song"))
         {

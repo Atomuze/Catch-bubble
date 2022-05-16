@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreBoardSystem : MonoBehaviour
 {
@@ -13,8 +14,8 @@ public class ScoreBoardSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        perfectCount.GetComponent<TextMeshProUGUI>().text = GameSetting.judgeCount[0].ToString();
-        greatCount.GetComponent<TextMeshProUGUI>().text = GameSetting.judgeCount[1].ToString();
-        missCount.GetComponent<TextMeshProUGUI>().text = GameSetting.judgeCount[2].ToString();
+        perfectCount.GetComponent<Text>().text = GameSetting.judgeCount[0].ToString();
+        greatCount.GetComponent<Text>().text = GameSetting.judgeCount[1].ToString();
+        missCount.GetComponent<Text>().text = GameSetting.judgeCount[2].ToString();
     }
 }
