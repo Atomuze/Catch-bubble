@@ -1,9 +1,9 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ComboText : MonoBehaviour
 {
-    public TMP_Text Text;
+    public Text textCombo;
     public static int count = 0;
 
     // Start is called before the first frame update
@@ -17,11 +17,11 @@ public class ComboText : MonoBehaviour
     {
         if (count > 0)
         {
-            Text.text = "Combo " + count;
+            textCombo.text = "Combo " + count;
         }
         else
         {
-            Text.text = "";
+            textCombo.text = "";
         }
     }
 }

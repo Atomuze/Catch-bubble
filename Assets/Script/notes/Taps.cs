@@ -46,7 +46,7 @@ public class Taps : MonoBehaviour
 
                 if (frameCount > distanceByFrame - judgeFrameCount[0] && frameCount < distanceByFrame + judgeFrameCount[0])
                 {
-                    if (ScreenTouch.getTouched())
+                    if (ScreenTouch.getTouched() || Input.GetButtonDown("Fire1"))
                     {
                         judgeReport(0);
                         GameSetting.judgeCount[0]++;
@@ -56,7 +56,7 @@ public class Taps : MonoBehaviour
                 }
                 else if (frameCount > distanceByFrame - judgeFrameCount[1] && frameCount < distanceByFrame + judgeFrameCount[1])
                 {
-                    if (ScreenTouch.getTouched())
+                    if (ScreenTouch.getTouched() || Input.GetButtonDown("Fire1"))
                     {
                         judgeReport(1);
                         GameSetting.judgeCount[1]++;

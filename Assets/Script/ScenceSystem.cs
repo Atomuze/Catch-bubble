@@ -108,13 +108,14 @@ public class ScenceSystem : MonoBehaviour
 
     void initialize()
     {
-        songName = GameSetting.title;
+        Debug.Log("internal: Song ID " + GameSetting.songId);
+        songName = GameSetting.songId;
         displayTime = 0f;
         frames = 0;
         GameSetting.judgeCount = new int[] { 0, 0, 0 };
 
         TextAsset txtAsset = (TextAsset)Resources.Load("song_data/" + songName, typeof(TextAsset));
-        Debug.Log(songName);
+        
         string data = txtAsset.text;
         musicInfo = JsonUtility.FromJson<MusicInfo>(data);
 

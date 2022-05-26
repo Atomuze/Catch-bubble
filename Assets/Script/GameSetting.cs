@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameSetting
 {
     //player
-    public static string title;
     public static int speed = 2;
     public static int offset2;
 
@@ -14,6 +13,9 @@ public class GameSetting
     public static bool debugMode = false;
 
     //internal
+    public static string songName = "null";
+    public static string songId = "null";
+
     public static int[] judgeFrame = new int[] { 3, 6 };    //perfect great
     public static int[] judgeCount = new int[] { 0, 0, 0};  //perfect great miss
 
