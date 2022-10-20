@@ -3,8 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - commads
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -14,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - bg
+  - 
   - 
   - 
   - 
@@ -39,18 +38,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: background
-    uniqueID: 1747433233
-    locked: 0
-  - name: UI
-    uniqueID: 3189629261
-    locked: 0
-  - name: playing
-    uniqueID: 1838588115
-    locked: 0
-  - name: notes
-    uniqueID: 310364467
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
