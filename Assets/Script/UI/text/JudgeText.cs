@@ -10,7 +10,7 @@ public class JudgeText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("setting judge text");
+        //Debug.Log("setting judge text");
         judgeText = GetComponent<TextMesh>();
     }
 

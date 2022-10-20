@@ -73,19 +73,21 @@ public class ScenceSystem : MonoBehaviour
                 setTheStartTime();
             }
 
-            if(tapSpawnTime.Count - 1 > tapCounts)
+            if(tapSpawnTime.Count > tapCounts)
             {
-                Debug.Log("tapCounts" + tapCounts);
-                Debug.Log("tapSpawnTime" + tapSpawnTime.Count);
+            //    Debug.Log("tapCounts" + tapCounts);
+            //    Debug.Log("tapSpawnTime" + tapSpawnTime.Count);
                 if (displayTime > tapSpawnTime[tapCounts] && displayTime < tapSpawnTime[tapCounts + 1])
                 {
                     SpawnTap(tapSpawnDegree[tapCounts]);
                     tapCounts++;
                 }
             }
-            
-            if(longSpawnTime.Count - 1 > longCounts)
+
+            Debug.Log("sp long" + longSpawnTime.Count);
+            if (longSpawnTime.Count > longCounts)
             {
+                Debug.Log("sp long");
                 if (displayTime > longSpawnTime[longCounts][0])
                 {
                     SpawnLong(longSpawnDegree[longCounts], (int)longSpawnTime[longCounts][1]);

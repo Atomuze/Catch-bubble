@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class ButtonStart : MonoBehaviour
 {
-    public Text btnSST;
-    public Text txtOffset;
+   //public Text btnSST;
+    public Text txtOffsetPlayer;
 
     public void OnButton()
     {
@@ -17,7 +17,8 @@ public class ButtonStart : MonoBehaviour
         if (!GameSetting.songId.Equals("null"))
         {
             SceneManager.LoadScene("playing");
-            GameSetting.offset2 = int.Parse(txtOffset.GetComponent<Text>().text);
+            //Debug.Log("t " + txtOffset.GetComponent<Text>().text);
+            GameSetting.offset2 = int.Parse(txtOffsetPlayer.GetComponent<Text>().text);
         }
         
     }
