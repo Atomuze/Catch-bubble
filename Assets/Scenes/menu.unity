@@ -1672,7 +1672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88abc7dc956d4654692a484199eca694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txtOffset: {fileID: 0}
+  txtOffsetPlayer: {fileID: 0}
 --- !u!224 &1906412729 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7128878733178503350, guid: 2db082929c3b46443adf1a5830854219, type: 3}
@@ -1701,7 +1701,7 @@ GameObject:
   - component: {fileID: 2040653523}
   - component: {fileID: 2040653522}
   m_Layer: 5
-  m_Name: TextOffset
+  m_Name: TextOffset2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
