@@ -9,11 +9,11 @@ public class MusicHandler : MonoBehaviour
 
     void Start()
     {
-        /*
+        
         AudioSource = gameObject.GetComponent<AudioSource>();
         AudioSource = GameObject.Find(SongName).GetComponent<AudioSource>();
         AudioClip audioClip = AudioSource.GetComponent<AudioSource>().clip;
         Debug.Log("music name " + audioClip.name + "\tlength: " + audioClip.length);
-        */
+        
     }
 }

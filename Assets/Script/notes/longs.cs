@@ -91,74 +91,71 @@ public class longs : MonoBehaviour
         }
         else
         {
-            if (!ScenceSystem.ispause)
+            if (distanceSquareE < 0.01)
             {
-                if (distanceSquareE < 0.01)
-                {
-                    narrow();
-                }
+                narrow();
+            }
 
-                //toruch start
-                if (frameCount > distanceByFrame - judgeFrame[0] && frameCount < distanceByFrame + judgeFrame[0])
+            //toruch start
+            if (frameCount > distanceByFrame - judgeFrame[0] && frameCount < distanceByFrame + judgeFrame[0])
+            {
+                if (ScreenTouch.getTouched())
                 {
-                    if (ScreenTouch.getTouched())
-                    {
-                        judge = 0;
-                    }
+                    judge = 0;
                 }
-                else if (frameCount > distanceByFrame - judgeFrame[1] && frameCount < distanceByFrame + judgeFrame[1])
+            }
+            else if (frameCount > distanceByFrame - judgeFrame[1] && frameCount < distanceByFrame + judgeFrame[1])
+            {
+                if (ScreenTouch.getTouched())
                 {
-                    if (ScreenTouch.getTouched())
-                    {
-                        judge = 1;
-                    }
+                    judge = 1;
                 }
-                else if (frameCount > distanceByFrame + judgeFrame[1])
-                {
-                    if (judge == 2)
-                    {
-                        judgeReport(2);
-                        GameSetting.judgeCount[2]++;
-                        destory();
-                    }
-                }
-
-                //touch release
-                if (frameCount > endFrame - judgeFrame[0] && frameCount < endFrame + judgeFrame[0])
-                {
-                    if (ScreenTouch.getTouchRelease())
-                    {
-                        if (judge == 0)
-                        {
-                            judgeReport(0);
-                            GameSetting.judgeCount[0]++;
-                            destory();
-                        }
-                        else
-                        {
-                            judgeReport(1);
-                            GameSetting.judgeCount[1]++;
-                            destory();
-                        }
-                    }
-                }
-                else if (frameCount > endFrame - judgeFrame[1] && frameCount < endFrame + judgeFrame[1])
-                {
-                    if (ScreenTouch.getTouchRelease())
-                    {
-                        judgeReport(1);
-                        GameSetting.judgeCount[1]++;
-                        destory();
-                    }
-                }
-                else if (frameCount > endFrame + judgeFrame[1])
+            }
+            else if (frameCount > distanceByFrame + judgeFrame[1])
+            {
+                if (judge == 2)
                 {
                     judgeReport(2);
                     GameSetting.judgeCount[2]++;
                     destory();
                 }
             }
-        }
+
+            //touch release
+            if (frameCount > endFrame - judgeFrame[0] && frameCount < endFrame + judgeFrame[0])
+            {
+                if (ScreenTouch.getTouchRelease())
+                {
+                    if (judge == 0)
+                    {
+                        judgeReport(0);
+                        GameSetting.judgeCount[0]++;
+                        destory();
+                    }
+                    else
+                    {
+                        judgeReport(1);
+                        GameSetting.judgeCount[1]++;
+                        destory();
+                    }
+                }
+            }
+            else if (frameCount > endFrame - judgeFrame[1] && frameCount < endFrame + judgeFrame[1])
+            {
+                if (ScreenTouch.getTouchRelease())
+                {
+                    judgeReport(1);
+                    GameSetting.judgeCount[1]++;
+                    destory();
+                }
+            }
+            else if (frameCount > endFrame + judgeFrame[1])
+            {
+                judgeReport(2);
+                GameSetting.judgeCount[2]++;
+                destory();
+            }
+        }        
     }
 
     private void judgeReport(int status)

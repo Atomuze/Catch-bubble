@@ -35,43 +35,42 @@ public class Taps : MonoBehaviour
         }
         else
         {
-            if (!ScenceSystem.ispause)
+            
+            if (distanceSquare < 0.01)
             {
-                if (distanceSquare < 0.01)
+                transform.position = new Vector2(0, 0);
+                transform.localScale -= new Vector3(1f / judgeFrameCount[1], 1f / judgeFrameCount[1], 0);
+            }
+
+
+            if (frameCount > distanceByFrame - judgeFrameCount[0] && frameCount < distanceByFrame + judgeFrameCount[0])
+            {
+                if (ScreenTouch.getTouched() || Input.GetButtonDown("Fire1"))
                 {
-                    transform.position = new Vector2(0, 0);
-                    transform.localScale -= new Vector3(1f / judgeFrameCount[1], 1f / judgeFrameCount[1], 0);
+                    judgeReport(0);
+                    GameSetting.judgeCount[0]++;
+                    destory();
                 }
 
-
-                if (frameCount > distanceByFrame - judgeFrameCount[0] && frameCount < distanceByFrame + judgeFrameCount[0])
+            }
+            else if (frameCount > distanceByFrame - judgeFrameCount[1] && frameCount < distanceByFrame + judgeFrameCount[1])
+            {
+                if (ScreenTouch.getTouched() || Input.GetButtonDown("Fire1"))
                 {
-                    if (ScreenTouch.getTouched() || Input.GetButtonDown("Fire1"))
-                    {
-                        judgeReport(0);
-                        GameSetting.judgeCount[0]++;
-                        destory();
-                    }
-
-                }
-                else if (frameCount > distanceByFrame - judgeFrameCount[1] && frameCount < distanceByFrame + judgeFrameCount[1])
-                {
-                    if (ScreenTouch.getTouched() || Input.GetButtonDown("Fire1"))
-                    {
-                        judgeReport(1);
-                        GameSetting.judgeCount[1]++;
-                        destory();
-                    }
-                }
-
-
-                if (frameCount > distanceByFrame + judgeFrameCount[1])
-                {
-                    judgeReport(2);
-                    GameSetting.judgeCount[2]++;
+                    judgeReport(1);
+                    GameSetting.judgeCount[1]++;
                     destory();
                 }
             }
+
+
+            if (frameCount > distanceByFrame + judgeFrameCount[1])
+            {
+                judgeReport(2);
+                GameSetting.judgeCount[2]++;
+                destory();
+            }
+            
         }
 
     }

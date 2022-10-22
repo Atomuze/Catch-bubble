@@ -8,7 +8,6 @@ public class ScreenTouch : MonoBehaviour
     private static bool touching = false;
     private static bool touchrelease = false;
     private static bool oneTouch = false;
-    private static bool doubleTouch = false;
 
     void Update()
     {
@@ -51,10 +50,4 @@ public class ScreenTouch : MonoBehaviour
     {
         return oneTouch;
     }
-
-    public static bool getDoubleTouch()
-    {
-        return false;
-    }
-
 }

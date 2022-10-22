@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NotesFormate : MonoBehaviour
+public class NotesFormate
 {
     public static List<string> notes = new List<string>();
     public static List<float> tapSpawnTime = new List<float>();
@@ -28,7 +28,7 @@ public class NotesFormate : MonoBehaviour
             }
         }
 
-        Debug.Log("format tap...");
+        //Debug.Log("format tap...");
 
         float beatCount = 0;
         float beat = 4;

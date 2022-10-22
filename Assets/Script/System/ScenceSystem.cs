@@ -12,10 +12,10 @@ public class ScenceSystem : MonoBehaviour
     public Button buttonPause, buttonSelectSong;
     public Text debugText;
     
-    public static string songName;
+    public static string musicName;
     private int tapCounts = 0, longCounts = 0;  //tap and long list count
     private float startTime, displayTime;
-    public static bool ispause = false, isEnd = false;
+    public static bool isEnd = false;
 
     //note list
     private List<float> tapSpawnTime = new List<float>();
@@ -39,7 +39,7 @@ public class ScenceSystem : MonoBehaviour
         isEnd = false;
         ComboText.count = 0;
 
-        initialize();
+        SceneInit();
         setTheStartTime();
     }
 
@@ -55,51 +55,50 @@ public class ScenceSystem : MonoBehaviour
             lastInterval = timeNow;
         }
 
-        if (!ispause)
+       
+        displayTime = Time.time - startTime;
+
+        //debug
+        if (GameSetting.debugMode)
         {
-            displayTime = Time.time - startTime;
+            debugText.text = "Display Time\t" + displayTime.ToString() 
+                + "\n Taps Count\t" + tapCounts 
+                + "\n musictimediff\t" + (audioSource.time - displayTime) 
+                + "\n FPS:\t" + fps;
+        }
+        //Force Correction 
+        if (System.Math.Abs(audioSource.time - displayTime - ((musicInfo.offset + GameSetting.offset2) / 1000f)) > 0.2f)
+        {
+            setTheStartTime();
+        }
 
-            //debug
-            if (GameSetting.debugMode)
+        if(tapSpawnTime.Count > tapCounts)
+        {
+        //    Debug.Log("tapCounts" + tapCounts);
+        //    Debug.Log("tapSpawnTime" + tapSpawnTime.Count);
+            if (displayTime > tapSpawnTime[tapCounts] && displayTime < tapSpawnTime[tapCounts + 1])
             {
-                debugText.text = "Display Time\t" + displayTime.ToString() 
-                    + "\n Taps Count\t" + tapCounts 
-                    + "\n musictimediff\t" + (audioSource.time - displayTime) 
-                    + "\n FPS:\t" + fps;
-            }
-            //Force Correction 
-            if (System.Math.Abs(audioSource.time - displayTime - ((musicInfo.offset + GameSetting.offset2) / 1000f)) > 0.2f)
-            {
-                setTheStartTime();
-            }
-
-            if(tapSpawnTime.Count > tapCounts)
-            {
-            //    Debug.Log("tapCounts" + tapCounts);
-            //    Debug.Log("tapSpawnTime" + tapSpawnTime.Count);
-                if (displayTime > tapSpawnTime[tapCounts] && displayTime < tapSpawnTime[tapCounts + 1])
-                {
-                    SpawnTap(tapSpawnDegree[tapCounts]);
-                    tapCounts++;
-                }
-            }
-
-            Debug.Log("sp long" + longSpawnTime.Count);
-            if (longSpawnTime.Count > longCounts)
-            {
-                Debug.Log("sp long");
-                if (displayTime > longSpawnTime[longCounts][0])
-                {
-                    SpawnLong(longSpawnDegree[longCounts], (int)longSpawnTime[longCounts][1]);
-                    longCounts++;
-                }
-            }
-            
-            if (audioSource.clip.length - audioSource.time < 0.2)
-            {
-                isEnd = true;
+                SpawnTap(tapSpawnDegree[tapCounts]);
+                tapCounts++;
             }
         }
+
+        //Debug.Log("sp long" + longSpawnTime.Count);
+        if (longSpawnTime.Count > longCounts)
+        {
+            //Debug.Log("sp long");
+            if (displayTime > longSpawnTime[longCounts][0])
+            {
+                SpawnLong(longSpawnDegree[longCounts], (int)longSpawnTime[longCounts][1]);
+                longCounts++;
+            }
+        }
+            
+        if (audioSource.clip.length - audioSource.time < 0.2)
+        {
+            isEnd = true;
+        }
+        
 
         //Debug.Log(isEnd);
         if (isEnd)
@@ -108,26 +107,26 @@ public class ScenceSystem : MonoBehaviour
         }
     }
 
-    void initialize()
+    void SceneInit()
     {
-        Debug.Log("internal: Song ID " + GameSetting.songId);
-        songName = GameSetting.songId;
+        Debug.Log("Internal: Music ID " + GameSetting.musicId);
+        musicName = GameSetting.musicId;
         displayTime = 0f;
         frames = 0;
         GameSetting.judgeCount = new int[] { 0, 0, 0 };
 
-        TextAsset txtAsset = (TextAsset)Resources.Load("song_data/" + songName, typeof(TextAsset));
+        TextAsset txtAsset = (TextAsset)Resources.Load("song_data/" + musicName, typeof(TextAsset));
         
         string data = txtAsset.text;
         musicInfo = JsonUtility.FromJson<MusicInfo>(data);
 
-        NotesFormate.formates(data, 60);
+        NotesFormate.formates(data, 60);                //music data, Frame Rate
         tapSpawnTime = NotesFormate.getTapSpawnTime();
         tapSpawnDegree = NotesFormate.getTapSpawnDegree();
         longSpawnTime = NotesFormate.getLongSpawnTime();
         longSpawnDegree = NotesFormate.getLongSpawnDegree();
 
-        audioSource = GameObject.Find(songName).GetComponent<AudioSource>();
+        audioSource = GameObject.Find(musicName).GetComponent<AudioSource>();
         audioSource.Play();
 
         Debug.Log("initialize complete");
@@ -135,7 +134,7 @@ public class ScenceSystem : MonoBehaviour
 
     public void setTheStartTime()
     {
-        Debug.Log("setTheStartTime");
+        Debug.Log("Set The Start Time");
         startTime = Time.time - (audioSource.time - musicInfo.offset / 1000f);
         displayTime = Time.time - startTime;
         audioSource.Play();
@@ -164,21 +163,6 @@ public class ScenceSystem : MonoBehaviour
             {
                 longCounts = 0;
             }
-        }
-    }
-
-    public void OnPauseBtn()
-    {
-        if (ispause)
-        {
-            setTheStartTime();
-            audioSource.Play();
-            ispause = false;
-        }
-        else
-        {
-            ispause = true;
-            audioSource.Pause();
         }
     }
 

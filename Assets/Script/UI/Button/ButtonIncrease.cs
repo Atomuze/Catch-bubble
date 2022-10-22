@@ -10,6 +10,7 @@ public class ButtonIncrease : MonoBehaviour
     {
         int offset = int.Parse(txtOffset.GetComponent<Text>().text) + 1;
         txtOffset.GetComponent<Text>().text = offset.ToString();
-        Debug.Log(offset);
+        GameSetting.offset2 += 1;
+        Debug.Log("On Button: Button Increase / offset2: " + GameSetting.offset2);
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class ButtonMenu : MonoBehaviour
 {
-
     public void OnBtn()
     {
         Debug.Log("On Button Menu");
